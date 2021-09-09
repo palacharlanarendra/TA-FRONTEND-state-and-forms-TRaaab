@@ -9,9 +9,9 @@ class App extends React.Component {
       maxValue: Infinity,
     };
   }
-  handleStep = (stepValue) => {
+  handleStep = (step) => {
     this.setState({
-      step: stepValue,
+      step: step,
     });
   };
   handleMaxValue = (max) => {
@@ -61,15 +61,25 @@ class App extends React.Component {
           <article className='flex limits'>
             <div className='step'>
               <h5>Steps</h5>
-              <button onClick={() => this.handleStep(5)}>5</button>
-              <button onClick={() => this.handleStep(10)}>10</button>
-              <button onClick={() => this.handleStep(15)}>15</button>
+              {[5, 10, 15].map((step) => (
+                <button
+                  onClick={() => this.handleStep(step)}
+                  className={this.state.step === step ? 'active' : ''}
+                >
+                  {step}
+                </button>
+              ))}
             </div>
             <div className='maxValue'>
               <h5>Max Value</h5>
-              <button onClick={() => this.handleMaxValue(15)}>15</button>
-              <button onClick={() => this.handleMaxValue(100)}>100</button>
-              <button onClick={() => this.handleMaxValue(200)}>200</button>
+              {[15, 100, 200].map((maxValue) => (
+                <button
+                  onClick={() => this.handleMaxValue(maxValue)}
+                  className={this.state.maxValue === maxValue ? 'active' : ''}
+                >
+                  {maxValue}
+                </button>
+              ))}
             </div>
           </article>
 
