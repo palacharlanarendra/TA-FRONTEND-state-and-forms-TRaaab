@@ -1,80 +1,86 @@
 import React from 'react';
-
-class App extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            counter : 0,
-            step : 5,
-            max : 15
-        }
-    }
-
-    handlInc = () => {
+import ReactDOM from 'react-dom';
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      step: 0,
+      maxValue: Infinity,
+    };
+  }
+  handleStep = (stepValue) => {
+    this.setState({
+      step: stepValue,
+    });
+  };
+  handleMaxValue = (max) => {
+    this.setState({
+      maxValue: max,
+    });
+  };
+  handleIncrement = (e) => {
+    if (this.state.count < this.state.maxValue) {
+      if (this.state.step != 0) {
         this.setState({
-            counter : this.state.counter + this.state.step > this.state.max ? this.state.counter : this.state.counter + this.state.step
-        })
-    }
-
-    handleDec = () => {
+          count: this.state.count + Number(this.state.step),
+        });
+      } else {
         this.setState({
-            counter : this.state.counter - this.state.step
-        })
+          count: this.state.count + 1,
+        });
+      }
     }
-
-    handleReset = () => {
+  };
+  handleDecrement = (e) => {
+    if (this.state.count <= this.state.maxValue) {
+      if (this.state.step != 0) {
         this.setState({
-            counter : 0,
-            step : 5,
-            max : 15
-        })
+          count: this.state.count - Number(this.state.step),
+        });
+      } else {
+        this.setState({
+          count: this.state.count - 1,
+        });
+      }
     }
-    render(){
-        var steps = [5,10,15];
-        var maxcount = [15,100,200];
-        return(
-            <div className="app">
-                <h2>Counter Application</h2>
-                <h1>{this.state.counter}</h1>
-                <div >
-                    <h2>Steps</h2>
-                    <div className="steps_max steps">
-                        {
-                            steps.map((each) => (
-                                <button className={this.state.step === each ? "active" : ""}  onClick={() => {
-                                    this.setState({step : each})
-                                }}>{each}</button>
-                            ))
-                        }
-                    </div>
-                </div>
-
-
-                <div >
-                    <h2>Max Category</h2>
-                    <div className="steps_max max">
-                        {
-                            maxcount.map((count) =>  (
-                                <button className={this.state.max === count ? "activ_count" : ""} onClick={() => this.setState({
-                                    max : count
-                                })}>{count}</button>
-                            ))
-                        }
-                    </div>
-                </div>
-
-
-               <div>
-                   <h2 className="inc_dec">Increament , Decreament , and Reset</h2>
-                    <div className="inc_dec_res">
-                        <button onClick={this.handlInc}>Increament</button>
-                        <button onClick={this.handleDec}>Decreament</button>
-                        <button onClick={this.handleReset}>Reset</button>
-                    </div>
-               </div>
+  };
+  handleReset = (e) => {
+    this.setState({
+      count: 0,
+      step: 0,
+      maxValue: Infinity,
+    });
+  };
+  render() {
+    return (
+      <>
+        <section className='section'>
+          <h3>Counter App</h3>
+          <h3>{this.state.count}</h3>
+          <article className='flex limits'>
+            <div className='step'>
+              <h5>Steps</h5>
+              <button onClick={() => this.handleStep(5)}>5</button>
+              <button onClick={() => this.handleStep(10)}>10</button>
+              <button onClick={() => this.handleStep(15)}>15</button>
             </div>
-        )
-    }
-}
+            <div className='maxValue'>
+              <h5>Max Value</h5>
+              <button onClick={() => this.handleMaxValue(15)}>15</button>
+              <button onClick={() => this.handleMaxValue(100)}>100</button>
+              <button onClick={() => this.handleMaxValue(200)}>200</button>
+            </div>
+          </article>
 
+          <div className='buttons'>
+            <button onClick={this.handleIncrement}>Increment</button>
+            <button onClick={this.handleDecrement}>Decrement</button>
+            <button onClick={this.handleReset}>Reset</button>
+          </div>
+        </section>
+      </>
+    );
+  }
+}
 export default App;
