@@ -50,12 +50,12 @@ class App extends React.Component {
         <section className='item__section'>
           {array.map((elem) => (
             <>
-              <article className="articles">
+              <article className='articles'>
                 <div className='item' key={elem.id}>
                   <h2>{elem.title}</h2>
                   <img src={elem.img} alt={elem.title} />
                   <p>{elem.category}</p>
-                  <p>{elem.price}</p>
+                  <p>Price: ${elem.price}</p>
                   <p>{elem.desc}</p>
                 </div>
               </article>
