@@ -67,9 +67,11 @@ class Shipping extends React.Component {
             />
           </form>
         </section>
-        <section>
-          <form>
+        <section className='billing'>
+          <h2>Billing Address</h2>
+          <form className='checkboxForm flex'>
             <input type='checkbox' onChange={this.handleCheck} />
+            <label>Same as the Shipping Address?</label>
           </form>
 
           {this.state.checked ? (
