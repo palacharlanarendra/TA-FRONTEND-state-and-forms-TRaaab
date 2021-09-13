@@ -6,4 +6,5 @@ form {
   flex-direction: column;
 }
 form input {
+  flex-direction: none;
 }
