@@ -1,0 +1,10 @@
+.flex {
+  display: flex;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+form input {
+  flex-direction: none;
+}
