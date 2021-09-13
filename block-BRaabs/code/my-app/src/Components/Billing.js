@@ -8,7 +8,7 @@ class Billing extends React.Component {
   render() {
     console.log(this.props.exportObj);
     return (
-      <div className=''>
+      <div className='billing__section'>
         <h2>Billing Address</h2>
         <form action=''>
           <label htmlFor='Address'>Address</label>
