@@ -1,0 +1,7 @@
+.article {
+  border: 2px solid green;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
