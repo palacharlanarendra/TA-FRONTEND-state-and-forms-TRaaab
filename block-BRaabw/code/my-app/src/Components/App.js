@@ -2,6 +2,7 @@
 /* eslint-disable no-useless-constructor */
 import React from 'react';
 import data from '../data.json';
+import Cart from './Cart';
 class App extends React.Component {
   constructor() {
     super();
@@ -10,6 +11,7 @@ class App extends React.Component {
       products: [],
       sizes: [],
       filteredProducts: [],
+      cart: [],
     };
 
     this.handleClick = () => {
@@ -26,8 +28,19 @@ class App extends React.Component {
         sortProducts: event.target.value,
       });
     };
+    this.handleAddToCart = (product) => {
+      if (this.state.cart.indexOf(product) === -1 ? true : false) {
+        this.setState((prevState) => {
+          return {
+            cart: [...prevState.cart, product],
+          };
+        });
+      }
+    };
   }
+
   render() {
+    console.log(this.state.cart);
     // console.log(this.state.sizes);
     let filteredArray = [];
     if (this.state.sizes.length >= 1) {
@@ -38,13 +51,15 @@ class App extends React.Component {
               ? filteredArray.push(product)
               : console.log('');
           }
+          return '';
         });
       }
     }
+    let productsArray;
     if (filteredArray.length === 0) {
-      var productsArray = data.products;
+      productsArray = data.products;
     } else {
-      var productsArray = filteredArray;
+      productsArray = filteredArray;
     }
     if (this.state.sortProducts === 'Highest to Lowest') {
       productsArray = productsArray.sort((a, b) => b.price - a.price);
@@ -52,6 +67,7 @@ class App extends React.Component {
     if (this.state.sortProducts === 'Lowest to Highest') {
       productsArray = productsArray.sort((a, b) => a.price - b.price);
     }
+    console.log();
     return (
       <>
         <section>
@@ -74,9 +90,9 @@ class App extends React.Component {
         </section>
         <section className='flex'>
           {productsArray.map((eachProduct) => (
-            <article className='article'>
+            <article className='article' key={eachProduct.id}>
               <img
-                src={`/static/products/` + `${eachProduct.sku}` + `_1.jpg`}
+                src={`/static/products/${eachProduct.sku}_1.jpg`}
                 alt={eachProduct.title}
               />
               <p>{eachProduct.title}</p>
@@ -85,12 +101,15 @@ class App extends React.Component {
               <p>{eachProduct.currencyFormat}</p>
               <p>{eachProduct.description}</p>
               <p>{eachProduct.price}</p>
+              <button onClick={() => this.handleAddToCart(eachProduct)}>
+                Add to the cart
+              </button>
             </article>
           ))}
         </section>
-        <section className='cart'>
-          <p onClick={this.handleClick}>click</p>
-          <article></article>
+        <section>
+          <h3>cart</h3>
+          <Cart cart={this.state.cart} />
         </section>
       </>
     );
