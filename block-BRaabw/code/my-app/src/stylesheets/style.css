@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.display {
+  display: block;
+  height: 100vh;
+  background-color: black;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80%;
+}
+.display p {
+  color: white;
+}
+.none {
+  display: none;
+}
