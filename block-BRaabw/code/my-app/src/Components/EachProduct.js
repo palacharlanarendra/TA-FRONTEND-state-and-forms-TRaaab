@@ -1,4 +1,5 @@
 import React from 'react';
+
 class EachProduct extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -22,8 +23,10 @@ class EachProduct extends React.Component {
           : this.state.quantity - 1,
     });
   };
-  onTrigger = (value) => {
-    this.props.parentCallback(value);
+  onTrigger = (id) => {
+    console.log(id, this.props);
+
+    this.props.parentCallback(id);
   };
 
   render() {
@@ -36,9 +39,9 @@ class EachProduct extends React.Component {
           />
           <p>{this.props.eachProduct.title}</p>
           <p>quantity : {this.state.quantity}</p>
-          <button
-            onClick={this.productsRemove(this.props.eachProduct)}
-          ></button>
+          <button onClick={() => this.onTrigger(this.props.eachProduct.id)}>
+            Delete
+          </button>
           <button onClick={this.addQuantity}>+</button>
           <button onClick={this.removeQuantity}>-</button>
         </article>
